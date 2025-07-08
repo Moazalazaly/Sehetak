@@ -1,0 +1,344 @@
+/* Base styles */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: black;
+}
+
+body {
+    margin: 0 7%;
+    background: linear-gradient(135deg, #e0f7fa, #ffffff);
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    background-color: #0b8bcc;
+}
+
+/* Layout utilities */
+.center-vertically {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Navigation styles */
+.nav-bar {
+    height: 84px;
+}
+
+nav ul {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    list-style: none;
+    display: inline;
+    margin: 0 16px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    color: #2c3e50;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+nav ul li a:hover {
+    color: #0b8bcc;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #0b8bcc;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+nav ul li a i {
+    transition: 0.3s;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+nav ul li a i:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+}
+
+/* Additional links (Sign Up and Login buttons) */
+.additional-links a:not(.burger) {
+    text-decoration: none;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.additional-links a.hideOnMoblie {
+    color: #0b8bcc;
+    border: 1.5px solid #0b8bcc;
+    border-radius: 8px;
+    padding: 10px 22px;
+    margin-left: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.additional-links a.hideOnMoblie:hover {
+    background: #0b8bcc;
+    color: white ;
+    box-shadow: 0 4px 16px 0 rgba(11, 139, 204, 0.15);
+    transform: translateY(-2px);
+}
+
+/*side responsive sidenav*/
+
+.sidenav {
+    padding: 32px 0;
+    position: absolute;
+    right: 0;
+    height: 100vh;
+    width: 75%;
+    background-color: rgba(27, 25, 25, 0.241);
+    box-shadow: -10px 0;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 1;
+    display: none;
+    animation: all 0.3 ease-in;
+    backdrop-filter: blur(200px);
+}
+
+.sidenav ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidenav ul li {
+    margin: 16px 0;
+}
+
+.sidenav .top {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.burger {
+    display: none;
+}
+
+/* Main content styles */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    min-height: 100vh;
+    background: none;
+}
+
+.content-title {
+    font-size: 2.7rem;
+    font-weight: 700;
+    color: #1a2a36;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.content-subtitle {
+    color: #4a5a6a;
+    font-size: 1.15rem;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+/* Form styles */
+.medical-form {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 4px 32px 0 rgba(30, 136, 229, 0.08);
+    padding: 36px 32px 24px 32px;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.medical-form label {
+    color: #1a2a36;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.medical-form input,
+.medical-form select {
+    padding: 12px 14px;
+    border: 1px solid #e0e7ef;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #1a2a36;
+    background: #f7fafc;
+    margin-bottom: 8px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.medical-form input:focus,
+.medical-form select:focus {
+    border: 1.5px solid #0b8bcc;
+}
+
+.medical-form textarea {
+    padding: 12px 14px;
+    border: 1px solid #e0e7ef;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #1a2a36;
+    background: #f7fafc;
+    outline: none;
+    resize: vertical;
+    min-height: 60px;
+    transition: border 0.2s;
+}
+
+.medical-form textarea:focus {
+    border: 1.5px solid #0b8bcc;
+}
+
+.medical-form div {
+    display: flex;
+    flex-direction: column;
+}
+
+.medical-form div label {
+    margin-bottom: 10px;
+}
+
+/* File upload styles */
+.file-label {
+    margin-bottom: 0;
+}
+
+.file-drop {
+    border: 2px dashed #b3c6d9;
+    border-radius: 12px;
+    background: #f7fafc;
+    padding: 24px 0 16px 0;
+    text-align: center;
+    color: #4a5a6a;
+    cursor: pointer;
+    margin-bottom: 8px;
+    transition: border 0.2s;
+}
+
+.file-drop i {
+    font-size: 2rem;
+    color: #0b8bcc;
+    margin-bottom: 8px;
+}
+
+.choose-file {
+    color: #0b8bcc;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Button styles */
+.submit-btn {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.submit-btn:hover {
+    background: #0b8bcc;
+}
+
+/* Footer styles */
+.secure-note {
+    color: #4a5a6a;
+    font-size: 0.95rem;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.secure-note i {
+    margin-right: 6px;
+}
+
+.content-footer {
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+    margin-top: 32px;
+    color: #1a2a36;
+    font-size: 1.08rem;
+    padding: 30px;
+}
+
+.content-footer i {
+    margin-right: 8px;
+    color: #0b8bcc;
+}
+
+/* Media Queries */
+@media (max-width: 800px) {
+    .hideOnMoblie {
+        display: none;
+    }
+
+    .burger {
+        display: block;
+    }
+}
+
+@media (max-width: 425px) {
+    .sidenav {
+        width: 100vw;
+    }
+}
+
+@media (min-width: 800px) {
+    .hideOnDesktop {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .medical-form {
+        padding: 24px 8px 16px 8px;
+        max-width: 98vw;
+    }
+    
+    .content-title {
+        font-size: 2rem;
+    }
+    
+    .content-footer {
+        flex-direction: column;
+        gap: 12px;
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,1224 @@
+<!-- medical-landing-page/profile/profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Medical Portal</title>
+    <!-- Update Font Awesome to the latest version -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- <link rel="stylesheet" href="profile.css"> -->
+     <style>
+        /* medical-landing-page/profile/profile.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+}
+
+/* Navigation Styles */
+.nav-bar {
+    background-color: #0b8bcc;
+    padding: 1rem 2rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-bar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-bar nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-bar nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.nav-bar nav a:hover,
+.nav-bar nav a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Profile Content Styles */
+.profile-content {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.profile-header {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-avatar {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.profile-avatar i {
+    font-size: 120px;
+    color: #0b8bcc;
+}
+
+.change-avatar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #0b8bcc;
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.change-avatar:hover {
+    background-color: #0970a3;
+}
+
+.profile-info h1 {
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.profile-info p {
+    color: #666;
+}
+
+/* Profile Sections */
+.profile-section {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f4f4f4;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.info-item label {
+    display: block;
+    color: #666;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.info-item p {
+    color: #333;
+    font-size: 1.1rem;
+}
+
+/* Profile Actions */
+.profile-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+.edit-profile-btn {
+    background-color: #0b8bcc;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s;
+}
+
+.edit-profile-btn:hover {
+    background-color: #0970a3;
+}
+
+/* Settings Navigation */
+.settings-nav {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100vh;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    z-index: 1000;
+}
+
+.settings-nav.active {
+    right: 0;
+}
+
+.settings-header {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.settings-content {
+    padding: 1rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.settings-menu {
+    list-style: none;
+}
+
+.settings-menu li {
+    margin-bottom: 0.5rem;
+}
+
+.settings-menu a {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    color: #333;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.settings-menu a:hover,
+.settings-menu a.active {
+    background-color: #f8f9fa;
+}
+
+.settings-menu i {
+    margin-right: 1rem;
+    width: 20px;
+    text-align: center;
+    color: #0b8bcc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-bar nav ul {
+        display: none;
+    }
+    
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Add to profile.css */
+/* Icon styles */
+.info-item label i,
+.profile-section h2 i {
+    margin-right: 0.5rem;
+    color: #0b8bcc;
+}
+
+.profile-section h2 i {
+    font-size: 1.2em;
+}
+
+.info-item label i {
+    width: 20px;
+    text-align: center;
+}
+
+/* Update profile avatar styles */
+.profile-avatar i {
+    color: #0b8bcc;
+    font-size: 120px;
+}
+
+/* Update settings menu icon styles */
+.settings-menu i {
+    width: 20px;
+    text-align: center;
+    margin-right: 1rem;
+    color: #0b8bcc;
+}
+
+/* Update settings button styles */
+.settings-btn i {
+    font-size: 1.2rem;
+}
+
+/* Update close settings button styles */
+.close-settings i {
+    font-size: 1.2rem;
+}
+
+/* Update user info icon styles */
+.user-info i {
+    color: #0b8bcc;
+    margin-right: 1rem;
+}
+
+/* Edit Profile Modal Styles */
+.edit-profile-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.edit-profile-modal.active {
+    display: block;
+}
+
+.modal-content {
+    background-color: white;
+    width: 90%;
+    max-width: 800px;
+    margin: 2rem auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    color: #333;
+    margin: 0;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #666;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: #333;
+}
+
+.form-section {
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.form-section h3 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-section h3 i {
+    color: #0b8bcc;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #0b8bcc;
+    outline: none;
+}
+
+.form-actions {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.cancel-btn,
+.save-btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.cancel-btn {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    color: #666;
+}
+
+.cancel-btn:hover {
+    background-color: #e4e4e4;
+}
+
+.save-btn {
+    background-color: #0b8bcc;
+    border: none;
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #0970a3;
+}
+
+/* Responsive adjustments for the modal */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 1rem auto;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .cancel-btn,
+    .save-btn {
+        width: 100%;
+    }
+}
+
+.chronic-diseases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.chronic-disease-card {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.chronic-disease-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.disease-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.disease-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.disease-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.status-active {
+    background-color: #dc3545;
+    color: white;
+}
+
+.status-remission {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.status-resolved {
+    background-color: #28a745;
+    color: white;
+}
+
+.disease-details {
+    margin-top: 1rem;
+}
+
+.disease-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: #6c757d;
+}
+
+.disease-detail i {
+    color: #0b8bcc;
+    width: 20px;
+}
+
+.disease-notes {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+    color: #495057;
+    font-style: italic;
+}
+
+.no-diseases {
+    text-align: center;
+    padding: 2rem;
+    color: #6c757d;
+    font-style: italic;
+}
+     </style>
+</head>
+<body>
+    <!-- Settings Navigation -->
+    <div class="settings-nav" id="settingsNav">
+        <div class="settings-header">
+            <h3>Settings</h3>
+            <button class="close-settings" onclick="toggleSettings()">
+                <i class="fas fa-xmark"></i>
+            </button>
+        </div>
+        <div class="settings-content">
+            <div class="user-info">
+                <i class="fas fa-user-circle fa-3x"></i>
+                <span id="settings-user-name">User Name</span>
+            </div>
+            <ul class="settings-menu">
+                <li>
+                    <a href="#" id="profile-settings" class="active">
+                        <i class="fas fa-user"></i>
+                        <span>Profile Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="account-settings">
+                        <i class="fas fa-gear"></i>
+                        <span>Account Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="notifications-settings">
+                        <i class="fas fa-bell"></i>
+                        <span>Notifications</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="privacy-settings">
+                        <i class="fas fa-shield-halved"></i>
+                        <span>Privacy & Security</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="help-settings">
+                        <i class="fas fa-circle-question"></i>
+                        <span>Help & Support</span>
+                    </a>
+                </li>
+                <li class="logout-item">
+                    <a href="../home/home.html" id="logout">
+                        <i class="fas fa-right-from-bracket"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <section class="nav-bar center-vertically">
+        <h1 class="logo">Medical Portal</h1>
+        <nav>
+            <ul class="center-vertically hideOnMoblie">
+                <li><a href="../home/home.html">Home</a></li>
+                <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+                <li><a href="../profile/profile.html" class="active">Profile</a></li>
+                <li><a href="#">Appointments</a></li>
+                <li><a href="#">Messages</a></li>
+            </ul>
+        </nav>
+        <div class="additional-links center-vertically">
+            <button onclick="toggleSettings()" class="settings-btn">
+                <i class="fas fa-gear"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Profile Content -->
+    <main class="profile-content">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <i class="fas fa-user-circle fa-6x"></i>
+            </div>
+            <div class="profile-info">
+                <h1 id="profile-name">User Name</h1>
+                <p id="profile-role">Role</p>
+            </div>
+        </div>
+
+        <div class="profile-sections">
+            <!-- Basic Information Section -->
+            <section class="profile-section">
+                <h2><i class="fas fa-user"></i> Basic Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label><i class="fas fa-user-tag"></i> Full Name</label>
+                        <p id="info-name">-</p>
+                    </div>
+                    <div class="info-item">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <p id="info-email">-</p>
+                    </div>
+                    <div class="info-item">
+                        <label><i class="fas fa-phone"></i> Phone</label>
+                        <p id="info-phone">-</p>
+                    </div>
+                    <div class="info-item">
+                        <label><i class="fas fa-location-dot"></i> Address</label>
+                        <p id="info-address">-</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Professional Information Section (for doctors) -->
+            <section class="profile-section" id="professional-info">
+                <h2><i class="fas fa-stethoscope"></i> Professional Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label><i class="fas fa-user-md"></i> Specialty</label>
+                        <p id="info-specialty">-</p>
+                    </div>
+                    <div class="info-item">
+                        <label><i class="fas fa-id-card"></i> License Number</label>
+                        <p id="info-license">-</p>
+                    </div>
+                    <div class="info-item">
+                        <label><i class="fas fa-clock"></i> Experience</label>
+                        <p id="info-experience">-</p>
+                    </div>
+                    <div class="info-item">
+                        <label><i class="fas fa-hospital"></i> Affiliation</label>
+                        <p id="info-affiliation">-</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Medical Information Section (for patients) -->
+            <section class="profile-section" id="medical-info">
+                <h2><i class="fas fa-heartbeat"></i> Medical Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label><i class="fas fa-tint"></i> Blood Type</label>
+                        <p id="info-blood-type">-</p>
+                    </div>
+                    <div class="info-item">
+                        <label><i class="fas fa-allergies"></i> Allergies</label>
+                        <p id="info-allergies">-</p>
+                    </div>
+                    <div class="info-item">
+                        <label><i class="fas fa-venus-mars"></i> Gender</label>
+                        <p id="info-gender">-</p>
+                    </div>
+                    <div class="info-item">
+                        <label><i class="fas fa-phone-volume"></i> Emergency Contact</label>
+                        <p id="info-emergency">-</p>
+                    </div>
+                    <div class="info-item">
+                        <label><i class="fas fa-shield-alt"></i> Insurance Provider</label>
+                        <p id="info-insurance">-</p>
+                    </div>
+                    <div class="info-item">
+                        <label><i class="fas fa-calendar"></i> Date of Birth</label>
+                        <p id="info-dob">-</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chronic Diseases Section (for patients) -->
+            <section class="profile-section" id="chronic-diseases-section">
+                <h2><i class="fas fa-notes-medical"></i> Chronic Diseases</h2>
+                <div id="chronic-diseases-list" class="chronic-diseases-grid">
+                    <!-- Chronic diseases will be populated here -->
+                </div>
+            </section>
+        </div>
+
+        <div class="profile-actions">
+            <button class="edit-profile-btn" onclick="editProfile()">
+                <i class="fas fa-pen-to-square"></i>
+                Edit Profile
+            </button>
+        </div>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div class="edit-profile-modal" id="editProfileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Profile</h2>
+                <button class="close-modal" onclick="closeEditProfile()">
+                    <i class="fas fa-xmark"></i>
+                </button>
+            </div>
+            <form id="editProfileForm" onsubmit="saveProfileChanges(event)">
+                <!-- Basic Information -->
+                <div class="form-section">
+                    <h3><i class="fas fa-user"></i> Basic Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="edit-name">Full Name</label>
+                            <input type="text" id="edit-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-email">Email</label>
+                            <input type="email" id="edit-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-phone">Phone</label>
+                            <input type="tel" id="edit-phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-address">Address</label>
+                            <input type="text" id="edit-address" name="address">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional Information (for doctors) -->
+                <div class="form-section" id="edit-professional-info">
+                    <h3><i class="fas fa-stethoscope"></i> Professional Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="edit-specialty">Specialty</label>
+                            <input type="text" id="edit-specialty" name="specialty">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-license">License Number</label>
+                            <input type="text" id="edit-license" name="license">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-experience">Experience (years)</label>
+                            <input type="number" id="edit-experience" name="experience">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-affiliation">Affiliation</label>
+                            <input type="text" id="edit-affiliation" name="affiliation">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medical Information (for patients) -->
+                <div class="form-section" id="edit-medical-info">
+                    <h3><i class="fas fa-heartbeat"></i> Medical Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="edit-blood-type">Blood Type</label>
+                            <select id="edit-blood-type" name="bloodType">
+                                <option value="">Select Blood Type</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-allergies">Allergies</label>
+                            <input type="text" id="edit-allergies" name="allergies">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-gender">Gender</label>
+                            <select id="edit-gender" name="gender">
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-emergency">Emergency Contact</label>
+                            <input type="text" id="edit-emergency" name="emergencyContact">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-insurance">Insurance</label>
+                            <input type="text" id="edit-insurance" name="insurance">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-dob">Date of Birth</label>
+                            <input type="date" id="edit-dob" name="dob">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" onclick="closeEditProfile()">Cancel</button>
+                    <button type="submit" class="save-btn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- <script src="profile.js"></script> -->
+     <script>
+        // Update profile.js
+document.addEventListener('DOMContentLoaded', async function() {
+    // Get user data from localStorage
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    console.log('User Data in Profile:', userData);
+    
+    if (userData) {
+        try {
+            // Fetch complete user data from server
+            const token = localStorage.getItem('token');
+            const response = await fetch(`/api/${userData.role}s/${userData.id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch user data');
+            }
+
+            const serverData = await response.json();
+            console.log('Server Data:', serverData);
+
+            // Fetch chronic diseases for patients
+            let chronicDiseases = [];
+            if (userData.role === 'patient') {
+                try {
+                    const diseasesResponse = await fetch(`/api/patients/${userData.id}/chronic-diseases`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    if (diseasesResponse.ok) {
+                        const diseasesData = await diseasesResponse.json();
+                        chronicDiseases = diseasesData.diseases || [];
+                    }
+                } catch (error) {
+                    console.error('Error fetching chronic diseases:', error);
+                }
+            }
+
+            // Merge server data with local data
+            const completeUserData = {
+                ...userData,
+                ...serverData,
+                phone: serverData.patient_phone || serverData.doctor_phone,
+                address: serverData.patient_address || serverData.clinic_address,
+                bloodType: serverData.bloodtype,
+                gender: serverData.gender,
+                emergencyContact: serverData.p_emergency_contact,
+                insurance: serverData.insurance_provider_name || 'No Insurance',
+                dob: serverData.P_birth_date ? new Date(serverData.P_birth_date).toLocaleDateString() : '-',
+                allergies: serverData.allergies || 'None',
+                chronicDiseases: chronicDiseases,
+                // For doctors
+                specialty: serverData.specialization_name,
+                license: serverData.docLicenseNumber,
+                experience: serverData.years_of_experience,
+                affiliation: serverData.hospital_name
+            };
+
+            // Update localStorage with complete data
+            localStorage.setItem('userData', JSON.stringify(completeUserData));
+
+            // Update profile display
+            updateProfileDisplay(completeUserData);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            // Fallback to local data if server fetch fails
+            updateProfileDisplay(userData);
+        }
+    } else {
+        console.log('No user data found in localStorage');
+        window.location.href = '../home/home.html';
+    }
+});
+
+// Update profile display with user data
+function updateProfileDisplay(userData) {
+    // Update profile header
+    document.getElementById('profile-name').textContent = userData.name || '-';
+    document.getElementById('profile-role').textContent = userData.role === 'doctor' ? 'Doctor' : 'Patient';
+    
+    // Update settings user name
+    document.getElementById('settings-user-name').textContent = userData.name || '-';
+    
+    // Update basic information
+    document.getElementById('info-name').textContent = userData.name || '-';
+    document.getElementById('info-email').textContent = userData.email || '-';
+    document.getElementById('info-phone').textContent = userData.phone || '-';
+    document.getElementById('info-address').textContent = userData.address || '-';
+    
+    // Show/hide sections based on role
+    const professionalInfo = document.getElementById('professional-info');
+    const medicalInfo = document.getElementById('medical-info');
+    const chronicDiseasesSection = document.getElementById('chronic-diseases-section');
+    
+    if (userData.role === 'doctor') {
+        professionalInfo.style.display = 'block';
+        medicalInfo.style.display = 'none';
+        chronicDiseasesSection.style.display = 'none';
+        
+        // Update professional information
+        document.getElementById('info-specialty').textContent = userData.specialty || '-';
+        document.getElementById('info-license').textContent = userData.license || '-';
+        document.getElementById('info-experience').textContent = `${userData.experience || '-'} years`;
+        document.getElementById('info-affiliation').textContent = userData.affiliation || '-';
+    } else {
+        professionalInfo.style.display = 'none';
+        medicalInfo.style.display = 'block';
+        chronicDiseasesSection.style.display = 'block';
+        
+        // Update medical information
+        document.getElementById('info-blood-type').textContent = userData.bloodType || '-';
+        document.getElementById('info-allergies').textContent = userData.allergies || 'None';
+        document.getElementById('info-gender').textContent = userData.gender || '-';
+        document.getElementById('info-emergency').textContent = userData.emergencyContact || '-';
+        document.getElementById('info-insurance').textContent = userData.insurance || 'No Insurance';
+        document.getElementById('info-dob').textContent = userData.dob || '-';
+
+        // Update chronic diseases
+        const chronicDiseasesList = document.getElementById('chronic-diseases-list');
+        if (userData.chronicDiseases && userData.chronicDiseases.length > 0) {
+            chronicDiseasesList.innerHTML = userData.chronicDiseases.map(disease => `
+                <div class="chronic-disease-card">
+                    <div class="disease-header">
+                        <span class="disease-name">${disease.disease_name}</span>
+                        <span class="disease-status status-${disease.status.toLowerCase().replace(' ', '-')}">
+                            ${disease.status}
+                        </span>
+                    </div>
+                    <div class="disease-details">
+                        <div class="disease-detail">
+                            <i class="fas fa-calendar"></i>
+                            <span>Diagnosed: ${new Date(disease.diagnosis_date).toLocaleDateString()}</span>
+                        </div>
+                        ${disease.notes ? `
+                            <div class="disease-notes">
+                                <i class="fas fa-note-sticky"></i>
+                                <span>${disease.notes}</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        } else {
+            chronicDiseasesList.innerHTML = `
+                <div class="no-diseases">
+                    <i class="fas fa-check-circle"></i>
+                    <p>No chronic diseases recorded</p>
+                </div>
+            `;
+        }
+    }
+}
+
+// Settings navigation toggle
+function toggleSettings() {
+    const settingsNav = document.getElementById('settingsNav');
+    settingsNav.classList.toggle('active');
+}
+
+// Edit profile function
+function editProfile() {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) return;
+
+    // Show the modal
+    const modal = document.getElementById('editProfileModal');
+    modal.classList.add('active');
+
+    // Populate form fields with current data
+    document.getElementById('edit-name').value = userData.name || '';
+    document.getElementById('edit-email').value = userData.email || '';
+    document.getElementById('edit-phone').value = userData.phone || '';
+    document.getElementById('edit-address').value = userData.address || '';
+
+    // Show/hide and populate role-specific fields
+    if (userData.role === 'doctor') {
+        document.getElementById('edit-professional-info').style.display = 'block';
+        document.getElementById('edit-medical-info').style.display = 'none';
+        
+        document.getElementById('edit-specialty').value = userData.specialty || '';
+        document.getElementById('edit-license').value = userData.license || '';
+        document.getElementById('edit-experience').value = userData.experience || '';
+        document.getElementById('edit-affiliation').value = userData.affiliation || '';
+    } else {
+        document.getElementById('edit-professional-info').style.display = 'none';
+        document.getElementById('edit-medical-info').style.display = 'block';
+        
+        document.getElementById('edit-blood-type').value = userData.bloodType || '';
+        document.getElementById('edit-allergies').value = userData.allergies || '';
+        document.getElementById('edit-gender').value = userData.gender || '';
+        document.getElementById('edit-emergency').value = userData.emergencyContact || '';
+        document.getElementById('edit-insurance').value = userData.insurance || '';
+        document.getElementById('edit-dob').value = userData.dob || '';
+    }
+}
+
+// Close edit profile modal
+function closeEditProfile() {
+    const modal = document.getElementById('editProfileModal');
+    modal.classList.remove('active');
+}
+
+// Save profile changes
+async function saveProfileChanges(event) {
+    event.preventDefault();
+    
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) return;
+
+    // Get form data
+    const formData = new FormData(event.target);
+    const updatedData = { ...userData };
+
+    // Update basic information
+    updatedData.name = formData.get('name');
+    updatedData.email = formData.get('email');
+    updatedData.phone = formData.get('phone');
+    updatedData.address = formData.get('address');
+
+    // Prepare data for API update
+    const apiData = {
+        patient_name: updatedData.name,
+        patient_email: updatedData.email,
+        patient_phone: updatedData.phone,
+        patient_address: updatedData.address
+    };
+
+    // Add role-specific fields
+    if (userData.role === 'doctor') {
+        updatedData.specialty = formData.get('specialty');
+        updatedData.license = formData.get('license');
+        updatedData.experience = formData.get('experience');
+        updatedData.affiliation = formData.get('affiliation');
+
+        // Add doctor-specific fields to API data
+        Object.assign(apiData, {
+            doctor_name: updatedData.name,
+            doctor_email: updatedData.email,
+            doctor_phone: updatedData.phone,
+            clinic_address: updatedData.address,
+            specialization_name: updatedData.specialty,
+            docLicenseNumber: updatedData.license,
+            years_of_experience: updatedData.experience,
+            hospital_name: updatedData.affiliation
+        });
+    } else {
+        // Get and validate patient-specific fields
+        const bloodType = formData.get('bloodType');
+        const gender = formData.get('gender');
+        const allergies = formData.get('allergies');
+        const emergencyContact = formData.get('emergencyContact');
+        const dob = formData.get('dob');
+
+        // Validate blood type
+        const validBloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+        if (bloodType && !validBloodTypes.includes(bloodType)) {
+            alert('Invalid blood type. Please select a valid blood type.');
+            return;
+        }
+
+        // Validate gender
+        const validGenders = ['Male', 'Female', 'Other'];
+        if (gender && !validGenders.includes(gender)) {
+            alert('Invalid gender. Please select a valid gender.');
+            return;
+        }
+
+        // Update local data
+        updatedData.bloodType = bloodType;
+        updatedData.allergies = allergies;
+        updatedData.gender = gender;
+        updatedData.emergencyContact = emergencyContact;
+        updatedData.dob = dob;
+
+        // Add patient-specific fields to API data with correct field names
+        Object.assign(apiData, {
+            bloodtype: bloodType || null,
+            allergies: allergies || null,
+            gender: gender || null,
+            p_emergency_contact: emergencyContact || null,
+            emergency_contact_phone: updatedData.phone || null,
+            P_birth_date: dob || null,
+            // Keep existing insurance_id if not changing
+            insurance_id: userData.insurance_id || null
+        });
+    }
+
+    try {
+        // Show loading state
+        const saveBtn = event.target.querySelector('.save-btn');
+        const originalBtnText = saveBtn.innerHTML;
+        saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+        saveBtn.disabled = true;
+
+        // Log the data being sent
+        console.log('Sending update data:', apiData);
+
+        // Make API call to update user data
+        const token = localStorage.getItem('token');
+        const response = await fetch(`/api/${userData.role}s/${userData.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(apiData)
+        });
+
+        // Log the raw response
+        console.log('Response status:', response.status);
+        const responseText = await response.text();
+        console.log('Raw response:', responseText);
+
+        let responseData;
+        try {
+            responseData = JSON.parse(responseText);
+        } catch (e) {
+            console.error('Error parsing response:', e);
+            throw new Error('Invalid server response');
+        }
+
+        if (!response.ok) {
+            // Handle specific error cases
+            if (response.status === 400) {
+                if (responseData.message === 'Email already in use by another patient') {
+                    throw new Error('This email is already in use by another patient');
+                } else if (responseData.message === 'Invalid blood type') {
+                    throw new Error('Invalid blood type selected');
+                } else if (responseData.message === 'Invalid gender') {
+                    throw new Error('Invalid gender selected');
+                } else if (responseData.message === 'Invalid insurance provider ID') {
+                    throw new Error('Invalid insurance provider selected');
+                } else {
+                    throw new Error(responseData.message || 'Invalid data provided');
+                }
+            } else if (response.status === 404) {
+                throw new Error('Patient not found');
+            } else {
+                console.error('Server error details:', responseData);
+                throw new Error(responseData.message || responseData.error || 'Failed to update profile');
+            }
+        }
+
+        // Update local storage with new data
+        localStorage.setItem('userData', JSON.stringify(updatedData));
+
+        // Update display
+        updateProfileDisplay(updatedData);
+
+        // Close modal
+        closeEditProfile();
+
+        // Show success message
+        alert('Profile updated successfully!');
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        console.error('Full error details:', {
+            message: error.message,
+            stack: error.stack,
+            userData: userData,
+            apiData: apiData
+        });
+        alert('Failed to update profile: ' + error.message);
+    } finally {
+        // Reset button state
+        const saveBtn = event.target.querySelector('.save-btn');
+        saveBtn.innerHTML = 'Save Changes';
+        saveBtn.disabled = false;
+    }
+}
+     </script>
+</body>
+</html>

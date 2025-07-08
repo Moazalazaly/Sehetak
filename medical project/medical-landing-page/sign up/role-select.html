@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Your Role - Sehetak</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e0f7fa, #ffffff);
+        }
+
+        .role-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 32px rgba(30, 136, 229, 0.08);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #1a2a36;
+            margin-bottom: 1rem;
+        }
+
+        .role-description {
+            color: #4a5a6a;
+            margin-bottom: 2rem;
+        }
+
+        .role-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .role-card {
+            background: #f7fafc;
+            border: 2px solid #e0e7ef;
+            border-radius: 8px;
+            padding: 1.5rem;
+            width: 200px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .role-card:hover {
+            border-color: #0b8bcc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(11, 139, 204, 0.15);
+        }
+
+        .role-card.selected {
+            border-color: #0b8bcc;
+            background: #e3f2fd;
+        }
+
+        .role-card i {
+            font-size: 2rem;
+            color: #0b8bcc;
+            margin-bottom: 1rem;
+        }
+
+        .role-card h3 {
+            color: #1a2a36;
+            margin: 0.5rem 0;
+        }
+
+        .role-card p {
+            color: #4a5a6a;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .continue-btn {
+            background: #1976d2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: none;
+        }
+
+        .continue-btn:hover {
+            background: #0b8bcc;
+        }
+
+        .continue-btn.visible {
+            display: inline-block;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #4a5a6a;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: #0b8bcc;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="role-container">
+        <h1>Join Sehetak</h1>
+        <p class="role-description">Select your role to get started with Sehetak</p>
+        
+        <div class="role-options">
+            <div class="role-card" data-role="patient">
+                <i class="fas fa-user"></i>
+                <h3>Patient</h3>
+                <p>Access medical services, book appointments, and manage your health records</p>
+            </div>
+            
+            <div class="role-card" data-role="doctor">
+                <i class="fas fa-user-md"></i>
+                <h3>Doctor</h3>
+                <p>Manage your practice, see patients, and provide medical services</p>
+            </div>
+        </div>
+
+        <button class="continue-btn" id="continueBtn">Continue</button>
+        <a href="/" class="back-link">Back to Home</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const roleCards = document.querySelectorAll('.role-card');
+            const continueBtn = document.getElementById('continueBtn');
+            let selectedRole = null;
+
+            roleCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove selected class from all cards
+                    roleCards.forEach(c => c.classList.remove('selected'));
+                    
+                    // Add selected class to clicked card
+                    this.classList.add('selected');
+                    
+                    // Store selected role
+                    selectedRole = this.dataset.role;
+                    
+                    // Show continue button
+                    continueBtn.classList.add('visible');
+                });
+            });
+
+            continueBtn.addEventListener('click', function() {
+                if (selectedRole) {
+                    // Redirect to signup form with role parameter
+                    window.location.href = `/signup.html?role=${selectedRole}`;
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Login - Sehetak</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        .signup-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .signup-link a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: #a94442;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+        .forgot-password {
+            text-align: right;
+            margin-top: 5px;
+        }
+        .forgot-password a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Patient Login</h1>
+        <form id="loginForm" novalidate>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error-message" id="email_error"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <div class="error-message" id="password_error"></div>
+                <div class="forgot-password">
+                    <a href="../forgot-password/forgot-password.html">Forgot Password?</a>
+                </div>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <div class="signup-link">
+            Don't have an account? <a href="../sign up/signup.html">Sign up here</a>
+        </div>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        // Form validation
+        function validateForm() {
+            let isValid = true;
+            const errors = {};
+
+            // Email validation
+            const email = document.getElementById('email').value.trim();
+            if (!email) {
+                errors.email = 'Email is required';
+                isValid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                errors.email = 'Please enter a valid email address';
+                isValid = false;
+            }
+
+            // Password validation
+            const password = document.getElementById('password').value;
+            if (!password) {
+                errors.password = 'Password is required';
+                isValid = false;
+            }
+
+            // Display errors
+            Object.keys(errors).forEach(key => {
+                const errorDiv = document.getElementById(`${key}_error`);
+                if (errorDiv) {
+                    errorDiv.textContent = errors[key];
+                    errorDiv.style.display = 'block';
+                }
+            });
+
+            return isValid;
+        }
+
+        // Clear errors on input
+        document.querySelectorAll('input').forEach(element => {
+            element.addEventListener('input', () => {
+                const errorDiv = document.getElementById(`${element.id}_error`);
+                if (errorDiv) {
+                    errorDiv.style.display = 'none';
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                return;
+            }
+
+            // Clear any existing auth data first
+            localStorage.removeItem('token');
+            localStorage.removeItem('userData');
+            localStorage.removeItem('doctorData');
+            localStorage.removeItem('patientData');
+            localStorage.removeItem('currentForm');
+
+            const formData = {
+                email: document.getElementById('email').value.trim(),
+                password: document.getElementById('password').value
+            };
+
+            const messageDiv = document.getElementById('message');
+            messageDiv.className = 'message';
+            messageDiv.textContent = 'Logging in...';
+
+            try {
+                // Try patient login first
+                let response = await fetch('http://localhost:5000/api/patients/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                let data = await response.json();
+                let userRole = 'patient';
+                
+                if (!response.ok) {
+                    // If patient login fails, try doctor login
+                    response = await fetch('http://localhost:5000/api/doctors/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    data = await response.json();
+                    userRole = 'doctor';
+                }
+                
+                if (response.ok) {
+                    // Store the token
+                    localStorage.setItem('token', data.token);
+                    
+                    // Store user data based on role
+                    const userData = userRole === 'patient' ? {
+                        id: data.patient.patient_id,
+                        name: data.patient.patient_name,
+                        email: data.patient.patient_email,
+                        role: 'patient'
+                    } : {
+                        id: data.doctor.doctor_id,
+                        name: data.doctor.doctor_name,
+                        email: data.doctor.doctor_email,
+                        role: 'doctor'
+                    };
+                    
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                    
+                    messageDiv.className = 'message success';
+                    messageDiv.textContent = 'Login successful! Redirecting...';
+                    
+                    // Redirect to dashboard with a slight delay
+                    setTimeout(() => {
+                        window.location.href = '../dashboard/dashboard.html';
+                    }, 1500);
+                } else {
+                    messageDiv.className = 'message error';
+                    messageDiv.textContent = 'Invalid email or password. Please try again.';
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                messageDiv.className = 'message error';
+                messageDiv.textContent = 'An error occurred. Please try again.';
+            }
+        });
+    </script>
+</body>
+</html> 

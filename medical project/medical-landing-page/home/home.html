@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- <link rel="stylesheet" href="home.css"> -->
+    <style>
+        /* Base styles */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: black;
+}
+
+body {
+    margin: 0 7%;
+    background: linear-gradient(135deg, #e0f7fa, #ffffff);
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    background-color: #0b8bcc;
+}
+
+/* Layout utilities */
+.center-vertically {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Navigation styles */
+.nav-bar {
+    height: 84px;
+}
+
+nav ul {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    list-style: none;
+    display: inline;
+    margin: 0 16px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    color: #2c3e50;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+nav ul li a:hover {
+    color: #0b8bcc;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #0b8bcc;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+nav ul li a i {
+    transition: 0.3s;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+nav ul li a i:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+}
+
+/* Additional links (Sign Up and Login buttons) */
+.additional-links a:not(.burger) {
+    text-decoration: none;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.additional-links a.hideOnMoblie {
+    color: #0b8bcc;
+    border: 1.5px solid #0b8bcc;
+    border-radius: 8px;
+    padding: 10px 22px;
+    margin-left: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.additional-links a.hideOnMoblie:hover {
+    background: #0b8bcc;
+    color: white ;
+    box-shadow: 0 4px 16px 0 rgba(11, 139, 204, 0.15);
+    transform: translateY(-2px);
+}
+
+/*side responsive sidenav*/
+
+.sidenav {
+    padding: 32px 0;
+    position: absolute;
+    right: 0;
+    height: 100vh;
+    width: 75%;
+    background-color: rgba(27, 25, 25, 0.241);
+    box-shadow: -10px 0;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 1;
+    display: none;
+    animation: all 0.3 ease-in;
+    backdrop-filter: blur(200px);
+}
+
+.sidenav ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidenav ul li {
+    margin: 16px 0;
+}
+
+.sidenav .top {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.burger {
+    display: none;
+}
+
+/* Main content styles */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    min-height: 100vh;
+    background: none;
+}
+
+.content-title {
+    font-size: 2.7rem;
+    font-weight: 700;
+    color: #1a2a36;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.content-subtitle {
+    color: #4a5a6a;
+    font-size: 1.15rem;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+/* Form styles */
+.medical-form {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 4px 32px 0 rgba(30, 136, 229, 0.08);
+    padding: 36px 32px 24px 32px;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.medical-form label {
+    color: #1a2a36;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.medical-form input,
+.medical-form select {
+    padding: 12px 14px;
+    border: 1px solid #e0e7ef;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #1a2a36;
+    background: #f7fafc;
+    margin-bottom: 8px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.medical-form input:focus,
+.medical-form select:focus {
+    border: 1.5px solid #0b8bcc;
+}
+
+.medical-form textarea {
+    padding: 12px 14px;
+    border: 1px solid #e0e7ef;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #1a2a36;
+    background: #f7fafc;
+    outline: none;
+    resize: vertical;
+    min-height: 60px;
+    transition: border 0.2s;
+}
+
+.medical-form textarea:focus {
+    border: 1.5px solid #0b8bcc;
+}
+
+.medical-form div {
+    display: flex;
+    flex-direction: column;
+}
+
+.medical-form div label {
+    margin-bottom: 10px;
+}
+
+/* File upload styles */
+.file-label {
+    margin-bottom: 0;
+}
+
+.file-drop {
+    border: 2px dashed #b3c6d9;
+    border-radius: 12px;
+    background: #f7fafc;
+    padding: 24px 0 16px 0;
+    text-align: center;
+    color: #4a5a6a;
+    cursor: pointer;
+    margin-bottom: 8px;
+    transition: border 0.2s;
+}
+
+.file-drop i {
+    font-size: 2rem;
+    color: #0b8bcc;
+    margin-bottom: 8px;
+}
+
+.choose-file {
+    color: #0b8bcc;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Button styles */
+.submit-btn {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.submit-btn:hover {
+    background: #0b8bcc;
+}
+
+/* Footer styles */
+.secure-note {
+    color: #4a5a6a;
+    font-size: 0.95rem;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.secure-note i {
+    margin-right: 6px;
+}
+
+.content-footer {
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+    margin-top: 32px;
+    color: #1a2a36;
+    font-size: 1.08rem;
+    padding: 30px;
+}
+
+.content-footer i {
+    margin-right: 8px;
+    color: #0b8bcc;
+}
+
+/* Media Queries */
+@media (max-width: 800px) {
+    .hideOnMoblie {
+        display: none;
+    }
+
+    .burger {
+        display: block;
+    }
+}
+
+@media (max-width: 425px) {
+    .sidenav {
+        width: 100vw;
+    }
+}
+
+@media (min-width: 800px) {
+    .hideOnDesktop {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .medical-form {
+        padding: 24px 8px 16px 8px;
+        max-width: 98vw;
+    }
+    
+    .content-title {
+        font-size: 2rem;
+    }
+    
+    .content-footer {
+        flex-direction: column;
+        gap: 12px;
+        font-size: 1rem;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <section class="center-vertically sidenav">
+        <div class="top">
+            <h1>Se7etak</h1>
+            <a onclick="hideSidenav()" href=""><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a>
+        </div>
+        <nav>
+            <ul class="">
+                <li><a href="/">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Doctors</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="additional-links">
+            <a href="/signup.html" class="signup-btn">Sign Up</a>
+            <a href="/login" class="login-btn">Login</a>
+        </div>
+    </section>
+
+    <section class="nav-bar center-vertically">
+        <h1 class="logo" style="font-size: 35px;">Sehetak</h1>
+        <nav>
+            <ul class="center-vertically hideOnMoblie">
+                <li><a href="/">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Doctors</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="additional-links center-vertically">
+            <a href="/signup" class="signup-btn hideOnMoblie">Sign Up</a>
+            <a href="/login" class="login-btn hideOnMoblie">Login</a>
+            <a onclick=showSidenav() class="burger hideOnDesktop" href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a>
+        </div>
+    </section>
+
+    <section class="content">
+        <h1 class="content-title">Submit Your Medical Files Securely</h1>
+        <p class="content-subtitle">Upload prescriptions, reports, or any medical documents with full privacy and care.</p>
+        <form class="medical-form">
+
+
+           <div>
+            <label for="doctype">Type of Document</label>
+            <select id="doctype" name="doctype">
+                <option>Prescription</option>
+                <option>Report</option>
+                <option>lab test</option>
+            </select>
+           </div>
+
+            <div>
+                <label for="file-upload" class="file-label">
+                    <div class="file-drop">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>Drag and drop a file here</span>
+                        <small>or <span class="choose-file">choose file</span></small>
+                    </div>
+                    <input type="file" id="file-upload" name="file-upload" style="display:none;">
+                </label>
+            </div>
+
+            <div>
+                <label for="message">Optional Message</label>
+                <textarea id="message" name="message" placeholder="write about your medical document to easily identify it" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Document</button>
+            <div class="secure-note"><i class="fa-solid fa-lock"></i> 100% secure & confidential</div>
+        </form>
+        <div class="content-footer">
+            <div><i class="fa-solid fa-lock"></i> Secure Upload</div>
+            <div><i class="fa-solid fa-stethoscope"></i> Used by Top Clinics</div>
+        </div>
+    </section>
+
+    <script>
+        function showSidenav() {
+            const sidenav = document.querySelector('.sidenav')
+            sidenav.style.display = 'flex'
+
+        }
+        function hideSidenav() {
+            const sidenav = document.querySelector('.sidenav')
+            sidenav.style.display = 'none'
+        }
+
+    </script>
+    <!-- <script src="home.js"></script> -->
+     <script>
+        // Sidenav show/hide
+function showSidenav() {
+    const sidenav = document.querySelector('.sidenav');
+    sidenav.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Prevent background scroll
+}
+function hideSidenav() {
+    const sidenav = document.querySelector('.sidenav');
+    sidenav.style.display = 'none';
+    document.body.style.overflow = '';
+}
+// Close sidenav with Escape key
+window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') hideSidenav();
+});
+
+// File upload drag & drop and choose file
+const fileDrop = document.querySelector('.file-drop');
+const fileInput = document.getElementById('file-upload');
+const chooseFile = document.querySelector('.choose-file');
+
+if (fileDrop && fileInput) {
+    // Highlight on drag over
+    fileDrop.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        fileDrop.style.borderColor = '#1976d2';
+        fileDrop.style.background = '#e3f2fd';
+    });
+    fileDrop.addEventListener('dragleave', function(e) {
+        fileDrop.style.borderColor = '#b3c6d9';
+        fileDrop.style.background = '';
+    });
+    fileDrop.addEventListener('drop', function(e) {
+        e.preventDefault();
+        fileDrop.style.borderColor = '#b3c6d9';
+        fileDrop.style.background = '';
+        if (e.dataTransfer.files.length) {
+            fileInput.files = e.dataTransfer.files;
+            showFileName();
+        }
+    });
+    // Click to choose file
+    if (chooseFile) {
+        chooseFile.addEventListener('click', function(e) {
+            e.preventDefault();
+            fileInput.click();
+        });
+    }
+    // Show file name on file select
+    fileInput.addEventListener('change', showFileName);
+}
+function showFileName() {
+    const fileNameSpan = document.querySelector('.file-drop span');
+    if (fileInput.files && fileInput.files.length > 0) {
+        fileNameSpan.textContent = fileInput.files[0].name;
+    } else {
+        fileNameSpan.textContent = 'Drag and drop a file here';
+    }
+}
+
+// Basic form submission handler
+const form = document.querySelector('.medical-form');
+if (form) {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Your document has been submitted! (Demo)');
+        form.reset();
+        showFileName();
+    });
+}
+
+// Expose sidenav functions globally for HTML onclick
+window.showSidenav = showSidenav;
+window.hideSidenav = hideSidenav;
+
+// --- Persist form data with localStorage ---
+const FORM_STORAGE_KEY = 'medicalFormData';
+
+function saveFormData() {
+    if (!form) return;
+    const data = {
+        doctype: form.querySelector('#doctype')?.value || '',
+        message: form.querySelector('#message')?.value || '',
+        fileName: form.querySelector('#file-upload')?.files[0]?.name || ''
+    };
+    localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(data));
+}
+
+function loadFormData() {
+    if (!form) return;
+    const data = JSON.parse(localStorage.getItem(FORM_STORAGE_KEY) || '{}');
+    if (data.doctype !== undefined) form.querySelector('#doctype').value = data.doctype;
+    if (data.message !== undefined) form.querySelector('#message').value = data.message;
+    // Show file name if present
+    if (data.fileName) {
+        const fileNameSpan = document.querySelector('.file-drop span');
+        if (fileNameSpan) fileNameSpan.textContent = data.fileName;
+    }
+}
+
+if (form) {
+    // Save on input/change
+    form.querySelectorAll('#doctype, #message, #file-upload').forEach(el => {
+        el.addEventListener('input', saveFormData);
+        el.addEventListener('change', saveFormData);
+    });
+    // Load on page load
+    loadFormData();
+}
+
+// Clear data on submit
+if (form) {
+    form.addEventListener('submit', function() {
+        localStorage.removeItem(FORM_STORAGE_KEY);
+    });
+}
+
+     </script>
+</body>
+</html>
