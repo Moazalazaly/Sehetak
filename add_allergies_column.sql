@@ -1,1 +1,0 @@
-ALTER TABLE Patient ADD COLUMN allergies TEXT AFTER bloodtype; 

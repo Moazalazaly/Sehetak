@@ -1,1 +1,0 @@
-ALTER TABLE Patient ADD COLUMN password VARCHAR(100) NOT NULL AFTER updated_at; 
