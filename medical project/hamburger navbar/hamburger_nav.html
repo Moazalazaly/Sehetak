@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="hamburger_nav.css">
+    
+</head>
+<body>
+
+    <section class="center-vertically sidenav">
+        <div class="top">
+            <h1 class="logo">LOGO</h1>
+            <a onclick="hideSidenav()" href=""><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a>
+        </div>
+        <nav>
+            <ul class="">
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+            </ul>
+        </nav>
+        <div class="additional-links">
+            <a href="">button</a>
+            <a href="">button</a>
+        </div>
+    </section>
+
+    <section class="nav-bar center-vertically">
+        <h1 class="logo">LOGO</h1>
+        <nav>
+            <ul class="center-vertically hideOnMoblie">
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+            </ul>
+        </nav>
+        <div class="additional-links center-vertically">
+            <a href="" class="hideOnMoblie">button</a>
+            <a href="" class="hideOnMoblie">button</a>
+            <a onclick=showSidenav() class="burger hideOnDesktop" href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a>
+
+        </div>
+        
+    </section>
+
+
+
+    <script>
+        function showSidenav() {
+            const sidenav = document.querySelector('.sidenav')
+            sidenav.style.display = 'flex'
+
+        }
+        function hideSidenav() {
+            const sidenav = document.querySelector('.sidenav')
+            sidenav.style.display = 'none'
+        }
+
+    </script>
+</body>
+</html>

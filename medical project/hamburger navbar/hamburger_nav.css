@@ -1,0 +1,132 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: white;
+}
+body {
+    margin: 0 7%;
+    background-image: url("https://nemiroff.vodka/wp-content/uploads/2024/06/desktop.webp");
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+.center-vertically {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-bar {
+    height: 84px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    transition: 0.5s;
+    font-size: 18px;
+
+}
+
+nav ul li {
+    list-style: none;
+    display: inline;
+    margin: 0 16px;
+}
+
+nav ul {
+    height: 100%;
+    display: flex;
+}
+
+nav ul li a:hover {
+    color: #FBB117;
+    transition: 0.5s;
+}
+
+
+.additional-links a:not(.burger) {
+text-decoration: none;
+margin: 0 10px;
+border: 1px solid white;
+padding: 10px;
+transition: 0.5s;
+}
+
+.additional-links li {
+    list-style: none;
+}
+
+.additional-links a:hover:not(.burger) {
+    background-color: #FBB117;
+    border: 1px solid #FBB117;
+    transition: 0.5s;
+}
+
+/*side responsive sidenav*/
+
+.sidenav {
+    padding: 32px 0;
+    position: absolute;
+    right: 0;
+    height: 100vh;
+    width: 75%;
+    background-color: rgba(27, 25, 25, 0.241);
+    box-shadow: -10px 0 ;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 1;
+    display: none;
+    animation: all 0.3 ease-in;
+    backdrop-filter: blur(200px);
+}
+
+.sidenav ul {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.sidenav ul li {
+    margin: 16px 0;
+}
+
+.sidenav .top {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.burger {
+    display: none;
+}
+
+
+@media (max-width : 800px) {
+    .hideOnMoblie {
+        display: none;
+    }
+
+    .burger {
+        display: block;
+    }
+
+
+}
+
+@media (max-width :425px) {
+    .sidenav {
+        width: 100vw;
+    }
+}
+
+@media (min-width : 800px) {
+    .hideOnDesktop {
+        display: none;
+    }
+}
+ /* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+ 
+
+
